@@ -31,3 +31,12 @@ $   docker stop [id/name]
 # remover o container do docker
 $   docker rm [id/name]
 ```
+
+### Porque usar docker compose?
+
+um arquivo para setar todos containers, exemplo: tenho mais do que o banco postgresql na aplicacao, imagina ter que vir no readme seguir o manual para rodar toda aplicacao, mais facil agrupar tudo em um arquivo docker-compose.yml e setar na maquina de um comando so.
+
+```bash
+# arquivo prenchido para subir aplicacao para o docker so usar comando: -d roda em background sem os logs.
+$   docker compose up -d
+```
