@@ -2,17 +2,23 @@
 
 ## Ferramentas
 
-- [] [Typescrupt]()
-- [] [Nodejs]()
-- [] [Docker]()
-- [] [Postgresql]()
+- [x] [Typescript]()
+- [x] [Nodejs]()
+- [x] [Docker]()
+- [x] [Postgresql]()
+- [x] [Prisma]()
 
 ## Setup Prisma
 
 
-migrations always
+migrations sempre atualizadas para o banco de dados.
+
 ```js
-$ npx prisma migrate dev
+$   npx prisma migrate dev
+// pra testar meu banco:
+$   npx prisma studio
+// para rodar todas migratiosn no banco de dados:
+$   npx prisma migrate deploy
 ```
 
 ## Setup Docker
@@ -39,4 +45,8 @@ um arquivo para setar todos containers, exemplo: tenho mais do que o banco postg
 ```bash
 # arquivo prenchido para subir aplicacao para o docker so usar comando: -d roda em background sem os logs.
 $   docker compose up -d
+#  para parar containers:
+$   docker compose stop
+# para para de deletar todos containers:
+$   docker compose down
 ```
