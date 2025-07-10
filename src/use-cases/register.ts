@@ -1,30 +1,28 @@
-import { prisma } from "@/libs/prisma";
-import { hash } from "crypto";
+import { UsersRepository } from "@/repositories/prisma/user-repository";
+import { hash } from "node:crypto";
 
 interface RegisterUseCaseRequest {
-    name: string;
-    email: string;
-    password: string;
+  name: string;
+  email: string;
+  password: string;
 }
+// Solid
+// D: Dependency Inversion Principle
+export class RegisterUseCase {
+  constructor(private userRepository: UsersRepository) {}
 
-export async function registerUseCase({name, email, password}: RegisterUseCaseRequest) {
+  async execute({ name, email, password }: RegisterUseCaseRequest) {
     const password_hash = hash("sha256", password).toString();
 
-  const userWithSameEmail = await prisma.user.findUnique({
-    where: {
-      email,
+    const userWithSameEmail = await this.userRepository.findByEmail(email);
+    if (userWithSameEmail) {
+      throw new Error("User already exists.");
     }
-  });
-
-  if( userWithSameEmail) {
-    throw new Error("❌ User with this email already exists.")
-  }
-
-  await prisma.user.create({
-    data: {
+    
+    this.userRepository.create({
       name,
       email,
-      password_hash, 
-    },
-  });
+      password_hash,
+    });
+  }
 }

@@ -1,4 +1,6 @@
+## Gym system
 
+Simple application that allows users to register, login, and manage their profiles. It is built using Node.js, TypeScript, and Prisma ORM for database management. The application follows the SOLID principles and uses the repository pattern to manage user data. The RegisterUseCase class is responsible for handling user registration logic, including password hashing and email uniqueness checks. The PrismaUsersRepository class implements the UsersRepository interface to interact with the database. The application uses Fastify for handling HTTP requests and Zod for request validation.
 
 ## Ferramentas
 
@@ -50,3 +52,5 @@ $   docker compose stop
 # para para de deletar todos containers:
 $   docker compose down
 ```
+
+## 
