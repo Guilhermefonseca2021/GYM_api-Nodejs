@@ -10,8 +10,21 @@ Simple application that allows users to register, login, and manage their profil
 - [x] [Postgresql]()
 - [x] [Prisma]()
 
-## Setup Prisma
 
+## Funcionalidades
+
+User
+    - [] register
+    - [] auth
+    - [] perfil
+    - [] count checkins
+    - [] gyms 
+    - [] validar checkins
+Gym 
+    - [] register
+
+
+## Setup Prisma
 
 migrations sempre atualizadas para o banco de dados.
 
