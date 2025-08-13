@@ -10,6 +10,7 @@ interface RegisterUseCaseRequest {
 }
 
 interface RegisterUseCaseResponse {
+  password_hash(arg0: string, password_hash: any): unknown;
   user: User;
 }
 
