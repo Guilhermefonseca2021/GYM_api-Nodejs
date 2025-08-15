@@ -2,19 +2,19 @@ import { InMemoryUsersRepository } from "@/repositories/prisma/in-memory/in-memo
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repositories";
 import { compare } from "bcrypt";
 import { describe, expect, it } from "vitest";
+import { UsersAlreadyExistsError } from "./errors/user-already-exists-erro";
 import { RegisterUseCase } from "./register";
-import { UsersAlreadyExistsError } from "./errors";
 
 describe("Register Use Case", () => {
   it("should hash password upon registration", async () => {
-    const userInMemoryRepository = new InMemoryUsersRepository();
     const prismaUsersRepository = new PrismaUsersRepository();
     const registerUseCase = new RegisterUseCase(prismaUsersRepository);
-    const registerUseCase2 = new RegisterUseCase(userInMemoryRepository);
+
+    const mail = new Date();
 
     const { user } = await registerUseCase.execute({
       name: "John Doe",
-      email: "JhonDiglle@gmail.com",
+      email: `jhon${mail}@gmail.com"`,
       password: "12345678",
     });
 
@@ -23,12 +23,8 @@ describe("Register Use Case", () => {
       user.password_hash!
     );
     console.log(user);
- 
-    expect(user.id).toEqual(expect.any(String))
-  });
 
-  it("should pass basic test", () => {
-    expect(2 + 2).toBe(4);
+    expect(user.id).toEqual(expect.any(String));
   });
 
   it("should not be able to register with same email twice", async () => {
@@ -42,8 +38,9 @@ describe("Register Use Case", () => {
       email,
       password: "12345678",
     });
+
     // resolve / reject
-    expect(() =>
+    await expect(() =>
       registerUseCase.execute({
         name: "John Doe",
         email,

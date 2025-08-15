@@ -1,5 +1,5 @@
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repositories";
-import { UsersAlreadyExistsError } from "@/use-cases/errors";
+import { UsersAlreadyExistsError } from "@/use-cases/errors/user-already-exists-erro";
 import { RegisterUseCase } from "@/use-cases/register";
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
@@ -22,13 +22,13 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     });
   } catch (err) {
     if (err instanceof UsersAlreadyExistsError) {
-      return reply.status(409).send({ 
+      return reply.status(409).send({
         message: err.message,
       });
     }
     return reply.status(500).send({
       message: "Internal Server Error",
-    }); 
+    });
   }
 
   return reply.status(201).send();
