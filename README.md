@@ -14,8 +14,8 @@ Simple application that allows users to register, login, and manage their profil
 ## Funcionalidades
 
 User
-    - [] register
-    - [] auth
+    - [x] register
+    - [x] auth
     - [] perfil
     - [] count checkins
     - [] gyms 
