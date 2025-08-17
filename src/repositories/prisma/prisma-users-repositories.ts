@@ -10,18 +10,33 @@ export class PrismaUsersRepository implements UsersRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const userWithSameEmail = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         email,
       },
     });
 
-    if (userWithSameEmail) {
+    if (user) {
       throw new Error("❌ User with this email already exists.");
     }
 
     return prisma.user.findUnique({ where: { email } });
   }
+
+  async findById(userId: string): Promise<User | null> {
+    const userWithId = await prisma.user.findUnique({
+      where: {
+        id: userId
+      }
+    })
+
+    if(!userWithId) {
+      throw new Error("❌ User doesn't exists.")
+    }
+
+    return userWithId
+  }
+
 
   async updateUser(id: string, data: Prisma.UserUpdateInput): Promise<User> {
     return prisma.user.update({ where: { id }, data });

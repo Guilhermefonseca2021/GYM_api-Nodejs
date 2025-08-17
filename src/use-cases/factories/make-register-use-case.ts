@@ -1,5 +1,4 @@
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repositories';
-import { UsersRepository } from '@/repositories/prisma/user-repository';
 import { RegisterUseCase } from '../register';
 
 
