@@ -16,10 +16,11 @@ Simple application that allows users to register, login, and manage their profil
 User
     - [x] register
     - [x] auth
+    - [x] get user logged
     - [] perfil
     - [] count checkins
     - [] gyms 
-    - [] validar checkins
+    - [x] validar checkins
 Gym 
     - [] register
 
