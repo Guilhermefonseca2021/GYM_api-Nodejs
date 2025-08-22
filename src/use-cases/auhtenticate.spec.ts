@@ -1,7 +1,6 @@
-import { InMemoryUsersRepository } from "@/repositories/prisma/in-memory/in-memory-repositories";
+import { InMemoryUsersRepository } from "@/repositories/prisma/in-memory/in-memory-users-repositories";
 import { hash } from "bcrypt";
-import { beforeEach } from "vitest"
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { AuthenticateUseCase } from "./authenticate";
 
 let usersRepository: InMemoryUsersRepository;

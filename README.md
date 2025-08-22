@@ -18,7 +18,7 @@ User
     - [x] auth
     - [x] get user logged
     - [] perfil
-    - [] count checkins
+    - [x] count checkins
     - [] gyms 
     - [x] validar checkins
 Gym 

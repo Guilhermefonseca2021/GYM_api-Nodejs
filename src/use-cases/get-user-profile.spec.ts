@@ -1,4 +1,4 @@
-import { InMemoryUsersRepository } from "@/repositories/prisma/in-memory/in-memory-repositories";
+import { InMemoryUsersRepository } from "@/repositories/prisma/in-memory/in-memory-users-repositories";
 import { hash } from "bcrypt";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";

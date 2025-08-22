@@ -1,12 +1,11 @@
-import { InMemoryUsersRepository } from "@/repositories/prisma/in-memory/in-memory-repositories";
+import { InMemoryUsersRepository } from "@/repositories/prisma/in-memory/in-memory-users-repositories";
 import { compare } from "bcrypt";
-import { beforeEach } from "vitest";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { UsersAlreadyExistsError } from "./errors/user-already-exists-erro";
 import { RegisterUseCase } from "./register";
 
-let usersRepository: InMemoryUsersRepository
-let sut: RegisterUseCase
+let usersRepository: InMemoryUsersRepository;
+let sut: RegisterUseCase;
 
 describe("Register Use Case", () => {
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe("Register Use Case", () => {
 
     const { user } = await sut.execute({
       name: "John Doe",
-      email: `jhon${mail}@gmail.com"`,   
+      email: `jhon${mail}@gmail.com"`,
       password: "12345678",
     });
 
