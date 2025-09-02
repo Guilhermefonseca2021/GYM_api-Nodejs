@@ -17,12 +17,13 @@ User
     - [x] register
     - [x] auth
     - [x] get user logged
-    - [] perfil
+    - [] profile
     - [x] count checkins
     - [] gyms 
     - [x] validar checkins
 Gym 
-    - [] register
+    - [x] register
+    - [x] not check in abrod the gym
 
 
 ## Setup Prisma

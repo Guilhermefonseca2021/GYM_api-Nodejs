@@ -21,8 +21,8 @@ describe("Check-in Use Case", () => {
       name: "Js Gym",
       description: "",
       phone: "",
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: new Decimal(-27.0747279),
+      longitude: new Decimal(-49.4889672),
       createdAt: new Date(),
     });
   });
@@ -35,8 +35,8 @@ describe("Check-in Use Case", () => {
     const { checkIn } = await sut.execute({
       gymId: "gym-01",
       userId: "user-01",
-      userLatitude: 0,
-      userLongitude: 0,
+      userLatitude: -27.0747279,
+      userLongitude: -49.4889672,
     });
 
     expect(checkIn.id).toEqual(expect.any(String));
@@ -48,28 +48,28 @@ describe("Check-in Use Case", () => {
     await sut.execute({
       gymId: "gym-01",
       userId: "user-01",
-      userLatitude: 0,
-      userLongitude: 0,
+      userLatitude: -27.0747279,
+      userLongitude: -49.4889672,
     });
 
     await expect(() =>
       sut.execute({
         gymId: "gym-01",
         userId: "user-01",
-        userLatitude: 0,
-        userLongitude: 0,
+        userLatitude: -27.0747279,
+        userLongitude: -49.4889672,
       })
     ).rejects.toBeInstanceOf(Error);
   });
 
-  it("should not be able to check in twice but in different days", async () => {
+  it("should be able to check in twice but in different days", async () => {
     vi.setSystemTime(new Date(2022, 0, 20, 8, 0, 0));
 
     await sut.execute({
       gymId: "gym-01",
       userId: "user-01",
-      userLatitude: 0,
-      userLongitude: 0,
+      userLatitude: -27.0747279,
+      userLongitude: -49.4889672,
     });
 
     vi.setSystemTime(new Date(2022, 0, 21, 8, 0, 0));
@@ -77,10 +77,31 @@ describe("Check-in Use Case", () => {
     const { checkIn } = await sut.execute({
       gymId: "gym-01",
       userId: "user-01",
-      userLatitude: 0,
-      userLongitude: 0,
+      userLatitude: -27.0747279,
+      userLongitude: -49.4889672,
     });
 
     expect(checkIn.id).toEqual(expect.any(String));
+  });
+
+  it("should not be able to check in onm distant gym.", async () => {
+    gymsRepository.items.push({
+      id: "gym-02",
+      name: "Js Gym",
+      description: "",
+      phone: "",
+      latitude: new Decimal(-27.0747279),
+      longitude: new Decimal(-49.4889672),
+      createdAt: new Date(),
+    });
+
+    expect(() =>
+      sut.execute({
+        gymId: "gym-2",
+        userId: "user-1",
+        userLatitude: -27.2092052,
+        userLongitude: -49.6401091,
+      })
+    ).rejects.toBeInstanceOf(Error);
   });
 });
