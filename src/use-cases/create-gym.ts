@@ -1,30 +1,37 @@
-import { Gym, User } from "@prisma/client";
-import { hash } from "bcrypt";
-import { UsersAlreadyExistsError } from "./errors/user-already-exists-erro";
 import { GymRepository } from "@/repositories/prisma/gyms-repository";
+import { Gym } from "@prisma/client";
 
 interface CreateGymCaseRequest {
   name: string;
-  description: string | null; 
-  phone: number;
+  description: string | null;
+  phone: string | null;
   latitude: number;
-  longitude: number
+  longitude: number;
 }
 
 interface CreateGymCaseResponse {
-  gym: Gym
+  gym: Gym;
 }
 
-export class CreateGymCase {
-  constructor(private userRepository: GymRepository) {}
+export class CreateGymUseCase {
+  constructor(private gymsRepository: GymRepository) {}
 
   async execute({
-    name,    
+    name,
     description,
     phone,
     latitude,
-    longitude
+    longitude,
   }: CreateGymCaseRequest): Promise<CreateGymCaseResponse> {
-
+    const gym = await this.gymsRepository.create({
+      name,
+      latitude,
+      longitude,
+      description,
+      phone,
+    });
+    return {
+      gym,
+    };
   }
 }
